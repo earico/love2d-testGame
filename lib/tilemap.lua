@@ -1,10 +1,11 @@
-require ("lib.tile")
+require("lib.tile")
 
+-- color list for Tiles
 local colors = {
-  {1, 1, 1},
-  {1, 0, 0},
-  {0, 1, 0},
-  {0, 0, 1}
+  {1, 1, 1}, -- 1: White
+  {1, 0, 0}, -- 2: Red
+  {0, 1, 0}, -- 3: Green
+  {0, 0, 1}  -- 4: Blue
 }
 
 Tilemap = {
@@ -30,6 +31,7 @@ function Tilemap:create(_map)
   self.width = #self.map[1]
   self.height = #self.map
 
+  -- # symbol gets length of list
   for i=1, #self.map do
     for j=1, #self.map[i] do
       local tile = Tile:new({

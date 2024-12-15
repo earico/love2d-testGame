@@ -10,6 +10,10 @@ local screenY = love.graphics.getHeight()
 function love.load()
   -- window settings
   love.window.setMode(800, 800)
+	love.graphics.setBackgroundColor(0.3, 0.1, 0)
+
+  -- global variables
+  Speed = 10
 
   local tiles = {
     {1, 1, 2, 2},
@@ -29,19 +33,25 @@ function love.update(dt)
 	end
 
 	if love.keyboard.isDown("left") then
-		x = x - 10
+		x = x - Speed
 	end
+
+	if love.keyboard.isDown("right") then
+		x = x + Speed
+	end
+
+	if love.keyboard.isDown("up") then
+    y = y - Speed
+	end
+
+	if love.keyboard.isDown("down") then
+    y = y + Speed
+	end
+
 end
 
 function love.draw()
-
-  --love.window.setFullscreen(true, "desktop")
-	love.graphics.setBackgroundColor(0.3, 0.1, 0)
-	love.graphics.setColor({1,1,1})
-	love.graphics.circle("fill", x, y, sz)
-	love.graphics.setColor(0.1, 0, 0.9)
-	love.graphics.line(300, 400, 600, 400)
-
-	--LoadTiles(tiles, 0, 0, 50)
+  love.graphics.setColor({1,1,1})
+  love.graphics.circle("fill", x, y, sz)
   T1:draw()
 end
