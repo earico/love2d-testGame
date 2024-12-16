@@ -45,6 +45,37 @@ function Tilemap:create(_map)
   end
 end
 
+-- collision for bounds detection by x and y values
+local function inBounds(x, y, tile)
+  return (
+    x - tile.size / 2 < tile.x + tile.size and
+    x + tile.size / 2 > tile.x - tile.size and
+    y - tile.size / 2 < tile.y + tile.size and
+    y + tile.size / 2 > tile.y - tile.size
+  )
+end
+
+-- returns tile at world pos (x,y)
+function Tilemap:getTile(x, y)
+  for i=1, #self.map do
+    for j=1, #self.map[i] do
+      if inBounds(x, y, self.map[i][j]) then
+        return self.map[i][j]
+      end
+    end
+  end
+  return false
+end
+
+-- returns tile via tilemap position [x][y]
+function Tilemap:getCellTile(x, y)
+  local cellTile = self.map[x][y]
+
+  if cellTile then
+    return {cellTile, gridPos = {x, y}}
+  end
+end
+
 -- iterates through tiles and calls their draw function (which uses rectangle() to draw)
 function Tilemap:draw()
   for i=1, #self.map do
