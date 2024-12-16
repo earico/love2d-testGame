@@ -35,8 +35,8 @@ function Tilemap:create(_map)
   for i=1, #self.map do
     for j=1, #self.map[i] do
       local tile = Tile:new({
-        x = ((j-1) * self.size) + self.x, -- + self.x/y applies position change
-        y = ((i-1) * self.size) + self.y, -- based on the canvas
+        x = (j * self.size) + self.x, -- + self.x/y applies position change
+        y = (i * self.size) + self.y, -- based on the canvas
         size = self.size,
         color = colors[self.map[i][j]] or {0, 0, 0, 0}
       })
@@ -46,12 +46,13 @@ function Tilemap:create(_map)
 end
 
 -- collision for bounds detection by x and y values
+-- removing " / 2" offsets collisions, but works.
 local function inBounds(x, y, tile)
   return (
-    x - tile.size / 2 < tile.x + tile.size and
-    x + tile.size / 2 > tile.x - tile.size and
-    y - tile.size / 2 < tile.y + tile.size and
-    y + tile.size / 2 > tile.y - tile.size
+    x > tile.x - tile.size / 2 and
+    x < tile.x + tile.size / 2 and
+    y > tile.y - tile.size / 2 and
+    y < tile.y + tile.size / 2
   )
 end
 
@@ -64,7 +65,7 @@ function Tilemap:getTile(x, y)
       end
     end
   end
-  return false
+  return nil
 end
 
 -- returns tile via tilemap position [x][y]
@@ -72,7 +73,17 @@ function Tilemap:getCellTile(x, y)
   local cellTile = self.map[x][y]
 
   if cellTile then
-    return {cellTile, gridPos = {x, y}}
+    return {cellTile.x, cellTile.y}
+  end
+end
+
+function Tilemap:printCellTile(x, y)
+  local cellTile = self.map[x][y]
+
+  if cellTile then
+    return
+      "x: " .. tostring(cellTile.x) ..
+      ", y: " .. tostring(cellTile.y)
   end
 end
 

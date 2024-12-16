@@ -18,11 +18,11 @@ function love.load()
     {1, 1, 2, 2},
     {4, 1, 3, 1},
     {1, 0, 0, 1},
-    {0, 0, 0, 1}
+    {4, 0, 0, 1},
   }
 
   -- Tilemap initialization
-  T1 = Tilemap:new({x = 250, y = 250, size = SIZE})
+  T1 = Tilemap:new({x = 200, y = 200, size = SIZE})
   T1:create(tiles)
 
   -- Player initialization
@@ -33,7 +33,7 @@ function love.update(dt)
   local currTile = T1:getTile(P1.x, P1.y)
 
   if currTile and P1:collision(currTile) then
-    TEXT = "YES"
+    TEXT = "YES | " .. tostring(currTile)
   else
     TEXT = "NO"
   end
@@ -44,10 +44,27 @@ end
 function love.draw()
   T1:draw()
   P1:draw()
+  love.graphics.setColor({1,1,1})
   love.graphics.print(
     "collisions: " .. TEXT ..
     " P1 Origin: " .. tostring(math.floor(P1.x)) ..
     ", " .. tostring(math.floor(P1.y)) ..
-    " SZ: " .. tostring(P1.size)
+    " CellPOS: " .. T1:printCellTile(4,4) ..
+    " Tile: " .. tostring(T1.map[4][4]) ..
+    " Tile: " .. tostring(T1.map[3][3])
   )
+
+  local file = io.open("tiledata.txt", "w")
+
+  if file then
+    for i=1, #T1.map do
+      for j=1, #T1.map[i] do
+        file:write("Tile: " .. tostring(T1.map[i][j]) .. ", ")
+      end
+      file:write("\n")
+    end
+
+    file:close()
+  end
+
 end
