@@ -4,16 +4,17 @@ require("lib.player")
 
 -- main code
 function love.load()
-  -- window settings
-  love.window.setTitle("test game")
-  love.window.setMode(800, 800)
-  love.graphics.setBackgroundColor(0.3, 0.1, 0)
-
   -- global variables
-  SCREEN = {love.graphics.getWidth(), love.graphics.getHeight()}
+  SCREEN = {800, 800}
   SIZE = 64
   TEXT = "collisions: NO"
 
+  -- window settings
+  love.window.setTitle("test game")
+  love.window.setMode(SCREEN[1], SCREEN[2])
+  love.graphics.setBackgroundColor(0.3, 0.1, 0)
+
+  -- tilemap data (will make json parser later for 3rd party software)
   local tiles = {
     {0, 0, 2, 2},
     {4, 0, 3, 0},
@@ -22,7 +23,7 @@ function love.load()
   }
 
   -- Tilemap initialization
-  T1 = Tilemap:new({x = 200, y = 200, size = SIZE})
+  T1 = Tilemap:new({x = SCREEN[1]/2, y = SCREEN[2]/2, size = SIZE})
   T1:create(tiles)
 
   -- Player initialization
