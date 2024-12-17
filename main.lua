@@ -15,10 +15,10 @@ function love.load()
   TEXT = "collisions: NO"
 
   local tiles = {
-    {1, 1, 2, 2},
-    {4, 1, 3, 1},
-    {1, 0, 0, 1},
-    {4, 0, 0, 1},
+    {0, 0, 2, 2},
+    {4, 0, 3, 0},
+    {4, 0, 2, 0},
+    {4, 0, 0, 2},
   }
 
   -- Tilemap initialization
@@ -32,8 +32,15 @@ end
 function love.update(dt)
   local currTile = T1:getTile(P1.x, P1.y)
 
-  if currTile and P1:collision(currTile) then
+  --[[  if currTile and P1:collision(currTile) then
     TEXT = "YES | " .. tostring(currTile)
+  else
+    TEXT = "NO"
+  end
+  ]]
+
+  if P1:mapCollision(T1) then
+    TEXT = "YES"
   else
     TEXT = "NO"
   end
