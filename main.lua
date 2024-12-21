@@ -44,9 +44,10 @@ function love.update(dt)
     TEXT = "YES"
   else
     TEXT = "NO"
+    P1:update(dt*2)
   end
 
-  P1:update(dt)
+  --P1:update(dt * 2)
 end
 
 function love.draw()

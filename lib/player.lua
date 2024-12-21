@@ -41,6 +41,7 @@ function Player:mapCollision(tilemap)
   end
 end
 
+-- collision detection for collision response
 function Player:collision(o2)
   return (
     self.x - self.size / 2 < o2.x + o2.size / 2 and
@@ -51,21 +52,25 @@ function Player:collision(o2)
   )
 end
 
+function Player:collisionResponse()
+
+end
+
 function Player:update(dt)
   if love.keyboard.isDown("left") then
-      self.x = math.floor(self.x - (self.speed * dt))
+      self.x = math.floor(self.x - math.floor(self.speed/2 * dt))
     end
 
     if love.keyboard.isDown("right") then
-      self.x = math.floor(self.x + (self.speed * dt))
+      self.x = math.floor(self.x + math.floor(self.speed * dt))
     end
 
     if love.keyboard.isDown("up") then
-      self.y = math.floor(self.y - (self.speed * dt))
+      self.y = math.floor(self.y - math.floor(self.speed/2 * dt))
     end
 
     if love.keyboard.isDown("down") then
-      self.y = math.floor(self.y + (self.speed * dt))
+      self.y = math.floor(self.y + math.floor(self.speed * dt))
     end
 end
 
