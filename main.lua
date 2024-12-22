@@ -16,7 +16,7 @@ function love.load()
 
   -- tilemap data (will make json parser later for 3rd party software)
   local tiles = {
-    {0, 0, 2, 2},
+    {1, 1, 2, 2},
     {4, 0, 3, 0},
     {4, 0, 2, 0},
     {4, 0, 0, 2},
