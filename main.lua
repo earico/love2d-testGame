@@ -5,7 +5,7 @@ require("lib.player")
 -- main code
 function love.load()
   -- global variables
-  SCREEN = {1200, 1600}
+  SCREEN = {1200, 600}
   SIZE = 32
   TEXT = "collisions: NO"
 
