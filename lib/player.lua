@@ -58,20 +58,20 @@ end
 
 function Player:update(dt)
   if love.keyboard.isDown("left") then
-      self.x = math.floor(self.x - math.floor(self.speed/2 * dt))
-    end
+    self.x = math.floor(self.x - math.floor(self.speed/2 * dt))
+  end
 
-    if love.keyboard.isDown("right") then
-      self.x = math.floor(self.x + math.floor(self.speed * dt))
-    end
+  if love.keyboard.isDown("right") then
+    self.x = math.floor(self.x + math.floor(self.speed/2 * dt))
+  end
 
-    if love.keyboard.isDown("up") then
-      self.y = math.floor(self.y - math.floor(self.speed/2 * dt))
-    end
+  if love.keyboard.isDown("up") then
+    self.y = math.floor(self.y - math.floor(self.speed/2 * dt))
+  end
 
-    if love.keyboard.isDown("down") then
-      self.y = math.floor(self.y + math.floor(self.speed * dt))
-    end
+  if love.keyboard.isDown("down") then
+    self.y = math.floor(self.y + math.floor(self.speed/2 * dt))
+  end
 end
 
 function Player:draw()
